@@ -4,24 +4,24 @@
       <div class="profile" :style="{backgroundImage : `url(${PostData.userImage})`}"></div>
       <span class="profile-name">{{PostData.name}}</span>
     </div>
-    <div class="post-body" :style="{backgroundImage : `url(${PostData.postImage})`}"></div>
+    <div  :class="PostData.filter" class="post-body" :style="{backgroundImage : `url(${PostData.postImage})`}"></div>
     <div class="post-content">
       <p>{{PostData.likes}}Likes</p>
       <p><strong>{{PostData.name}}</strong>{{PostData.content}}</p>
       <p class="date">{{PostData.date}}</p>
+      <p>안녕하세요 영철이형</p>
     </div>
 </div> 
 </template>
-
 <script>
 export default {
     name: 'PostVue',
     props : {
         PostData : Array,
+        ClickedFilter : String,
     }
 }
 </script>
-
 <style>
 .post {
   width: 100%;
@@ -55,6 +55,9 @@ export default {
   padding-left: 15px;
   padding-right: 15px;
   font-size: 14px;
+}
+.post-content strong {
+  margin-right: 10px;
 }
 .date {
   font-size: 11px;

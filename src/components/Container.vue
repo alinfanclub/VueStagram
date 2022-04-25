@@ -1,25 +1,22 @@
 <template> 
   <div>
       <div v-if="Step == 0">
-        <Post  :PostData ="PostData[i]" v-for="(post, i) in PostData" :key="i" ></Post>
+        <Post :PostData ="PostData[i]" v-for="(post, i) in PostData" :key="i" ></Post>
       </div>
 
       <!-- 필터선택페이지 -->
     <div v-if="Step == 1">
-        <div class="upload-image" :style="`background-image:url(${Image})`"></div>
+        <div :class="ClickedFilter"  class="upload-image" :style="`background-image:url(${Image})`"></div>
         <div class="filters">
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
-            <div class="filter-1"></div>
-            
+            <FilterBox :Image ="Image"  v-for="(F, i) in Filter" :key="i" :F="F">
+                {{F}}
+            </FilterBox>
         </div>
     </div>
 
 <!-- 글작성페이지 -->
     <div v-if="Step == 2">
-        <div class="upload-image" :style="`background-image:url(${Image})`"></div>
+        <div :class="ClickedFilter"  class="upload-image" :style="`background-image:url(${Image})`"></div>
         <div class="write">
             <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
         </div>
@@ -29,16 +26,25 @@
 
 <script>
 import PostVue from './Post'
+import FilterBox from "./FilterBox.vue"
+import Filter from "../data/Filter.js"
 
 export default {
     name: 'ContainerVue',
     components : {
-        Post : PostVue
+        Post : PostVue,
+        FilterBox : FilterBox,
     },
     props : {
         PostData : Array,
         Step: Number,
         Image : String,
+        ClickedFilter : String,
+    },
+    data(){
+        return {
+            Filter : Filter,
+        }
     }
 }
 </script>
@@ -50,17 +56,18 @@ export default {
  .upload-image{
 width: 100%;
 height: 450px;
-background: cornflowerblue;
+background:#fff;
 background-size : cover;
 }
 .filters{
 overflow-x:scroll;
 white-space: nowrap;
+display: flex;
 }
 .filter-1 {
 width: 100px;
 height: 100px;
-background-color: cornflowerblue;
+background-color: #fff;
 margin: 10px 10px 10px auto;
 padding: 8px;
 display: inline-block;

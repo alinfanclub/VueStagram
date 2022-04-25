@@ -9,7 +9,9 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-  <Container :PostData = "PostData" :Step="Step" :Image = "Image" @write="writen = $event" />
+  <!-- <h4>안녕 {{$store.state.name}}</h4> -->
+
+  <Container :ClickedFilter = "ClickedFilter" :PostData = "PostData" :Step="Step" :Image = "Image" @write="writen = $event" />
 
   <button v-if="Step == 0" @click="more" class="moreBtn">더보기</button>
   <!-- <div class="sample-box"></div> -->
@@ -42,6 +44,9 @@ export default {
       moreContent: 0,
       Step:0,
       Image : '',
+      // writen: '',
+      ClickedFilter : '',
+
       // Tap : 0,
     }
   },
@@ -76,11 +81,16 @@ export default {
       date: "May 15",
       liked: false,
       content: this.writen,
-      filter: "perpetua"
+      filter: this.ClickedFilter,
     };
       this.PostData.unshift(myContent);
       this.Step = 0;
     }
+  },
+  mounted(){
+    this.emitter.on('ClickedFilter', (a)=> {
+     this.ClickedFilter = a
+    })
   }
 }
 </script>
