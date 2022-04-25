@@ -4,9 +4,9 @@
       <div class="profile" :style="{backgroundImage : `url(${PostData.userImage})`}"></div>
       <span class="profile-name">{{PostData.name}}</span>
     </div>
-    <div  :class="PostData.filter" class="post-body" :style="{backgroundImage : `url(${PostData.postImage})`}"></div>
+    <div @click="$store.commit('UpLikes')" :class="PostData.filter" class="post-body" :style="{backgroundImage : `url(${PostData.postImage})`}"></div>
     <div class="post-content">
-      <p>{{PostData.likes}}Likes</p>
+      <p>{{$store.state.likes}}Likes</p>
       <p><strong>{{PostData.name}}</strong>{{PostData.content}}</p>
       <p class="date">{{PostData.date}}</p>
     </div>

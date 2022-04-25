@@ -9,10 +9,15 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-  <!-- <h4>안녕 {{$store.state.name}}</h4> -->
+  <h4>안녕 {{$store.state.name + $store.state.age}}</h4>
+  <button @click="$store.commit('ChangeName')">bth</button>
+  <button @click="$store.commit('UpAge')">UP</button>
+  <p>{{$store.state.more}}</p>
+  <button @click="$store.dispatch('getData')">more</button>
 
   <Container :ClickedFilter = "ClickedFilter" :PostData = "PostData" :Step="Step" :Image = "Image" @write="writen = $event" />
-
+  <p>{{now2}} {{count}}</p>
+  <button @click="count++">btn</button>
   <button v-if="Step == 0" @click="more" class="moreBtn">더보기</button>
   <!-- <div class="sample-box"></div> -->
 
@@ -46,12 +51,18 @@ export default {
       Image : '',
       // writen: '',
       ClickedFilter : '',
+      count : 0,
 
       // Tap : 0,
     }
   },
   components: {
     Container : Container,
+  },
+  computed : {
+    now2(){
+          return new Date();
+        }
   },
   methods : {
     more(){
@@ -85,6 +96,9 @@ export default {
     };
       this.PostData.unshift(myContent);
       this.Step = 0;
+    },
+    now(){
+      return new Date();
     }
   },
   mounted(){
