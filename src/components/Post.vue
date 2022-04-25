@@ -9,7 +9,6 @@
       <p>{{PostData.likes}}Likes</p>
       <p><strong>{{PostData.name}}</strong>{{PostData.content}}</p>
       <p class="date">{{PostData.date}}</p>
-      <p>안녕하세요 영철이형</p>
     </div>
 </div> 
 </template>
